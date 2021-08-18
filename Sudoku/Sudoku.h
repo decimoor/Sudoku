@@ -3,8 +3,8 @@ const int FIELD_WIDTH_HEIGHT = 9;
 
 struct SudokuBlock
 {
-	int front = 0;
-	int back = 0;
+	char front = '0';
+	char back = '0';
 };
 
 class SudokuField
