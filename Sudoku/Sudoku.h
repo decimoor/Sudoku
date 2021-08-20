@@ -23,14 +23,27 @@ class SudokuField
 				}
 			}
 		}
-		
-		bool PutNumber(int i, int j)
+
+		void SetField(SudokuBlock f[FIELD_WIDTH_HEIGHT][FIELD_WIDTH_HEIGHT])
 		{
+			for (int i = 0; i < FIELD_WIDTH_HEIGHT; i++)
+			{
+				for (int j = 0; j < FIELD_WIDTH_HEIGHT; j++)
+				{
+					field[i][j] = f[i][j];
+				}
+			}
+		}
+		
+		bool PutNumber(int number, int i, int j)
+		{
+			field[i][j].front = number;
 			if (field[i][j].front == field[i][j].back)
 			{
 				field[i][j].front = field[i][j].back;
 				return true;
 			}
+			UnputNumber(i, j);
 			
 			return false;
 		}

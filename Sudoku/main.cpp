@@ -2,7 +2,7 @@
 #include <vector>
 #include <Windows.h>
 #include "DataBase.h"
-
+#if DEBUG
 void Show(SudokuBlock** s)
 {
 	for (int i = 0; i < 9; i++)
@@ -28,6 +28,7 @@ void Show(SudokuBlock** s)
 
 }
 
+#endif
 int main()
 {
 	//std::vector<sf::Event> events;
@@ -42,8 +43,9 @@ int main()
 	//}
 	std::string file = "fields.txt";
 	DataBase dt(file);
+#if DEBUG
 	Show(dt.GetField(0));
 	std::cout << std::endl << std::endl;
 	Show(dt.GetField(1));
-
+#endif
 }
