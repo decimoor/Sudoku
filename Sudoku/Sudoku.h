@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 const int FIELD_WIDTH_HEIGHT = 9;
 
 struct SudokuBlock
@@ -13,7 +14,7 @@ class SudokuField
 		SudokuBlock field[FIELD_WIDTH_HEIGHT][FIELD_WIDTH_HEIGHT];
 
 	public:
-		SudokuField(SudokuBlock f[FIELD_WIDTH_HEIGHT][FIELD_WIDTH_HEIGHT])
+		SudokuField(SudokuBlock** f)
 		{
 			for (int i = 0; i < FIELD_WIDTH_HEIGHT; i++)
 			{
@@ -37,7 +38,11 @@ class SudokuField
 		
 		bool PutNumber(int number, int i, int j)
 		{
-			field[i][j].front = number;
+			if (number > 9)
+				return false;
+			if (number < 0)
+				return false;
+			field[i][j].front = number + 48;
 			if (field[i][j].front == field[i][j].back)
 			{
 				field[i][j].front = field[i][j].back;
@@ -50,8 +55,24 @@ class SudokuField
 
 		void UnputNumber(int i, int j)
 		{
-			field[i][j].front = 0;
+			field[i][j].front = '0';
 		}
+
+		bool Win()
+		{
+			for (int i = 0; i < 9; i++)
+			{
+				for (int j = 0; j < 9; j++)
+				{
+					if (field[i][j].front == '0')
+						return false;
+				}
+			}
+
+			return true;
+		}
+
+		friend class Game;
 		
 };
 

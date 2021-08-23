@@ -1,7 +1,9 @@
-#include <iostream>
-#include <vector>
+#include <SFML/Graphics.hpp>
 #include <Windows.h>
+
+#include "Game.h"
 #include "DataBase.h"
+
 #if DEBUG
 void Show(SudokuBlock** s)
 {
@@ -30,22 +32,18 @@ void Show(SudokuBlock** s)
 
 #endif
 int main()
-{
-	//std::vector<sf::Event> events;
-	//DataBase dt(path);
-	//SudokuField sf(dt.GetField(int NumberOfField));
-	//Game game;
-	//while(game.window.isOpen())
-	//{
-		//game.Draw(sf);
-		//game.GetInput();
-		//game.DealWithInput();
-	//}
-	std::string file = "fields.txt";
-	DataBase dt(file);
-#if DEBUG
-	Show(dt.GetField(0));
-	std::cout << std::endl << std::endl;
-	Show(dt.GetField(1));
-#endif
+{	
+	//LevelMenu lm;
+	//int fieldNumber = lm.ChooseLevel();
+	Game game("map.png");
+	DataBase dt("fields.txt");
+	SudokuField sf(dt.GetField(1));
+
+	while (game.isOpen())
+	{
+		game.DealWinthInput(sf);
+		game.Draw(sf);
+		
+	}
+	return 0;
 }
