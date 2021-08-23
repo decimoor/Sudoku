@@ -9,7 +9,7 @@ class DataBase
 	private:
 		std::ifstream file;
 	public:
-		DataBase(std::string& path)
+		DataBase(const std::string&  path)
 		{
 			
 			file.open(path);
